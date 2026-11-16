@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservar Ingresso | Arena Rock</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/images/icone-rock.svg">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav class="menu-cabecalho">
+        <a class="marca-topo" href="index.html">
+            <img class="logotipo" alt="Logotipo Arena Rock" title="Arena Rock"
+                src="./assets/images/logotipo-rock.svg" />
+        </a>
+        <ul class="navegacao">
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="index.html">Agenda Rock</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="bandas.html">Bandas &amp; Line-up</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="locais.html">Casas de Show</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao ativo" href="ingressos.html">Meus Ingressos</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="botao-chamada" href="admin/index.html">Backstage Admin</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="secao-inscricao">
+        <div id="inscricao-vazio" class="estado-vazio" hidden>
+            <p>Nenhum show selecionado para reserva.</p>
+            <a class="botao-principal" href="index.html">Ver Agenda de Shows</a>
+        </div>
+
+        <div id="inscricao-conteudo" class="conteudo-inscricao" hidden>
+            <section class="resumo-inscricao" id="resumo-evento"></section>
+
+            <div class="cartao-formulario">
+                <div class="cabecalho-formulario">
+                    <h2>Dados do Participante</h2>
+                    <p>Preencha suas informações para emitir sua credencial de acesso ao show.</p>
+                </div>
+
+                <form class="formulario-inscricao" id="formulario-inscricao" novalidate>
+                    <div class="grupo-formulario">
+                        <div class="titulo-grupo">
+                            <span class="numero-passo">1</span>
+                            <span>Identificação e Contato</span>
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="campo-nome">Nome completo <span class="obrigatorio">*</span></label>
+                            <input type="text" id="campo-nome" name="nome" placeholder="Digite seu nome completo" />
+                            <span class="erro-formulario" id="erro-nome" hidden></span>
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="campo-email">E-mail para envio do voucher <span class="obrigatorio">*</span></label>
+                            <input type="email" id="campo-email" name="email" placeholder="seuemail@exemplo.com" />
+                            <span class="erro-formulario" id="erro-email" hidden></span>
+                        </div>
+                    </div>
+
+                    <div class="grupo-formulario">
+                        <div class="titulo-grupo">
+                            <span class="numero-passo">2</span>
+                            <span>Escolha do Setor</span>
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="campo-setor">Setor / Modalidade do Ingresso</label>
+                            <select id="campo-setor" name="setor_ingresso">
+                                <option value="Pista Rock">Pista Rock (Lote Promocional)</option>
+                                <option value="Pista Premium (Frontstage)">Pista Premium (Frontstage - Frente ao Palco)</option>
+                                <option value="Mezanino / Camarote Backstage">Mezanino / Camarote Backstage</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="rodape-formulario">
+                        <button type="submit" class="botao-principal">Confirmar Presença &amp; Gerar Ingresso</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="inscricao-confirmada" class="confirmacao-inscricao" hidden>
+            <span class="selo-topo">Presença Confirmada no Show!</span>
+            <h1 class="titulo-principal">Seu Ingresso Rock foi Gerado!</h1>
+            <p>Apresente este código na portaria do evento:</p>
+            <strong class="codigo-destaque" id="codigo-confirmacao"></strong>
+            <p id="resumo-setor-confirmado"></p>
+            <div class="acoes-tabela">
+                <a class="botao-editar botao-pequeno" id="link-voltar-evento" href="index.html">Voltar para o Show</a>
+                <a class="botao-principal" href="ingressos.html">Ver Meus Ingressos</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="rodape">
+        <p>© 2026 Arena Rock — Circuito de Eventos de Rock &amp; Cultura Underground. Projeto de Desenvolvimento Web.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./supabase-credentials.js"></script>
+    <script src="./admin/js/supabaseClient.js"></script>
+    <script src="./js/api.js"></script>
+    <script src="./js/inscricao.js"></script>
+</body>
+
+</html>

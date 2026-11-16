@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backstage Admin | Arena Rock</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/images/icone-rock.svg">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav class="menu-cabecalho">
+        <a class="marca-topo" href="../index.html">
+            <img class="logotipo" alt="Logotipo Arena Rock" title="Arena Rock"
+                src="../assets/images/logotipo-rock.svg" />
+        </a>
+        <ul class="navegacao">
+            <li class="item-navegacao">
+                <a class="link-navegacao ativo" href="index.html">Painel</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="eventos.html">Shows &amp; Eventos</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="categorias.html">Categorias</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="inscritos.html">Ingressos / Inscritos</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="usuarios.html">Equipe</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="../index.html">Ver Site</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" id="botao-sair" href="login.html">Sair</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="painel-admin">
+        <div class="cabecalho-admin">
+            <div>
+                <h1>Backstage — Painel Administrativo</h1>
+                <p id="nome-admin-logado">Gerencie a programação de shows de rock, categorias, lotes de ingressos e equipe de produção.</p>
+            </div>
+            <a class="botao-principal" href="eventos.html#formulario-evento">+ Cadastrar Novo Show</a>
+        </div>
+
+        <div class="atalhos-admin">
+            <a class="cartao-atalho" href="eventos.html">
+                <strong>Shows &amp; Festivais</strong>
+                <span>Criar, editar e remover shows de rock, line-up de bandas, datas e lotes de ingressos.</span>
+            </a>
+            <a class="cartao-atalho" href="categorias.html">
+                <strong>Categorias Rock</strong>
+                <span>Organizar modalidades (Show, Festival, Tributo, Batalha de Bandas, Workshop, Encontro).</span>
+            </a>
+            <a class="cartao-atalho" href="inscritos.html">
+                <strong>Ingressos &amp; Inscritos</strong>
+                <span>Conferir a lista de rockeiros inscritos por show, setores e códigos de confirmação.</span>
+            </a>
+            <a class="cartao-atalho" href="usuarios.html">
+                <strong>Equipe de Produção</strong>
+                <span>Controlar produtores e administradores com acesso ao Backstage.</span>
+            </a>
+        </div>
+    </main>
+
+    <footer class="rodape">
+        <p>© 2026 Arena Rock — Circuito de Eventos de Rock &amp; Cultura Underground.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../supabase-credentials.js"></script>
+    <script src="./js/supabaseClient.js"></script>
+    <script src="./js/autenticacao.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Show | Arena Rock</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/images/icone-rock.svg">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav class="menu-cabecalho">
+        <a class="marca-topo" href="index.html">
+            <img class="logotipo" alt="Logotipo Arena Rock" title="Arena Rock"
+                src="./assets/images/logotipo-rock.svg" />
+        </a>
+        <ul class="navegacao">
+            <li class="item-navegacao">
+                <a class="link-navegacao ativo" href="index.html">Agenda Rock</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="bandas.html">Bandas &amp; Line-up</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="locais.html">Casas de Show</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="ingressos.html">Meus Ingressos</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="botao-chamada" href="admin/index.html">Backstage Admin</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="secao-detalhe">
+        <nav class="trilha-navegacao">
+            <a href="index.html">Agenda Rock</a>
+            <span>/</span>
+            <span id="migalha-titulo">Carregando...</span>
+        </nav>
+
+        <div id="detalhe-esqueleto" class="esqueleto-detalhe"></div>
+
+        <div id="detalhe-conteudo" hidden></div>
+
+        <div id="detalhe-nao-encontrado" class="estado-vazio" hidden>
+            <p>Show ou evento não encontrado na programação.</p>
+            <a class="botao-principal" href="index.html">Voltar para a Agenda Rock</a>
+        </div>
+    </main>
+
+    <footer class="rodape">
+        <p>© 2026 Arena Rock — Circuito de Eventos de Rock &amp; Cultura Underground. Projeto de Desenvolvimento Web.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./supabase-credentials.js"></script>
+    <script src="./admin/js/supabaseClient.js"></script>
+    <script src="./js/api.js"></script>
+    <script src="./js/detalhe.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipe de Produção | Backstage Admin</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/images/icone-rock.svg">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav class="menu-cabecalho">
+        <a class="marca-topo" href="../index.html">
+            <img class="logotipo" alt="Logotipo Arena Rock" title="Arena Rock"
+                src="../assets/images/logotipo-rock.svg" />
+        </a>
+        <ul class="navegacao">
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="index.html">Painel</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="eventos.html">Shows &amp; Eventos</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="categorias.html">Categorias</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="inscritos.html">Ingressos / Inscritos</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao ativo" href="usuarios.html">Equipe</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="../index.html">Ver Site</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" id="botao-sair" href="login.html">Sair</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="painel-admin">
+        <div class="cabecalho-admin">
+            <div>
+                <h1>Equipe de Produção &amp; Backstage</h1>
+                <p id="nome-admin-logado">Controle os produtores, curadores e operadores de portaria com acesso ao painel administrativo.</p>
+            </div>
+            <a class="botao-principal" href="#formulario-usuario">+ Novo Membro da Equipe</a>
+        </div>
+
+        <section class="bloco-admin">
+            <h2>Membros Cadastrados</h2>
+
+            <div class="envoltorio-tabela">
+                <table class="tabela-admin">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th>Função</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-usuarios"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="bloco-admin" id="formulario-usuario">
+            <div class="cabecalho-formulario">
+                <h2>Cadastrar Membro da Equipe</h2>
+                <p>Adicione um novo produtor ou operador e defina suas permissões de acesso ao painel.</p>
+            </div>
+
+            <form class="formulario-admin" id="form-cadastro-usuario" novalidate>
+                <div class="grupo-formulario">
+                    <div class="titulo-grupo">
+                        <span class="numero-passo">1</span>
+                        <span>Identificação do Membro</span>
+                    </div>
+
+                    <div class="grade-formulario-2">
+                        <div class="campo-formulario">
+                            <label for="campo-nome-usuario">Nome Completo <span class="obrigatorio">*</span></label>
+                            <input type="text" id="campo-nome-usuario" name="nome" placeholder="Ex: Diego Vaz" />
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="campo-email-usuario">E-mail de Acesso <span class="obrigatorio">*</span></label>
+                            <input type="email" id="campo-email-usuario" name="email" placeholder="diego@arenarock.com.br" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grupo-formulario">
+                    <div class="titulo-grupo">
+                        <span class="numero-passo">2</span>
+                        <span>Credencial &amp; Permissões</span>
+                    </div>
+
+                    <div class="grade-formulario-3">
+                        <div class="campo-formulario">
+                            <label for="campo-senha-usuario">Senha de Acesso</label>
+                            <input type="password" id="campo-senha-usuario" name="senha" placeholder="Defina uma senha" />
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="campo-papel-usuario">Função na Equipe</label>
+                            <select id="campo-papel-usuario" name="papel">
+                                <option value="administrador">Produtor / Administrador</option>
+                                <option value="usuario">Portaria / Operador</option>
+                            </select>
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="campo-status-usuario">Status da Conta</label>
+                            <select id="campo-status-usuario" name="status">
+                                <option value="ativo">Ativo</option>
+                                <option value="inativo">Inativo</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rodape-formulario">
+                    <button type="submit" class="botao-principal">Salvar Membro</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer class="rodape">
+        <p>© 2026 Arena Rock — Circuito de Eventos de Rock &amp; Cultura Underground.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../supabase-credentials.js"></script>
+    <script src="./js/supabaseClient.js"></script>
+    <script src="./js/autenticacao.js"></script>
+    <script src="./js/usuarios.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso Backstage | Arena Rock</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/images/icone-rock.svg">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav class="menu-cabecalho">
+        <a class="marca-topo" href="../index.html">
+            <img class="logotipo" alt="Logotipo Arena Rock" title="Arena Rock"
+                src="../assets/images/logotipo-rock.svg" />
+        </a>
+        <ul class="navegacao">
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="../index.html">Voltar para o Site</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="secao-login">
+        <span class="selo-topo">&#127928; Credencial Backstage</span>
+        <h1>Acesso da Produção</h1>
+        <p>Faça login para acessar os cadastros de shows, categorias, inscritos e equipe.</p>
+
+        <div class="cartao-formulario">
+            <form class="formulario-admin" id="formulario-login" novalidate>
+                <div class="grupo-formulario">
+                    <div class="campo-formulario">
+                        <label for="campo-email">E-mail da Produção <span class="obrigatorio">*</span></label>
+                        <input type="email" id="campo-email" name="email" placeholder="Digite seu e-mail"
+                            autocomplete="username" />
+                    </div>
+
+                    <div class="campo-formulario">
+                        <label for="campo-senha">Senha de Acesso <span class="obrigatorio">*</span></label>
+                        <input type="password" id="campo-senha" name="senha" placeholder="Digite sua senha"
+                            autocomplete="current-password" />
+                    </div>
+
+                    <span class="erro-formulario" id="erro-login" hidden></span>
+                </div>
+
+                <button type="submit" class="botao-principal" id="botao-entrar">Entrar no Backstage</button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="rodape">
+        <p>© 2026 Arena Rock — Circuito de Eventos de Rock &amp; Cultura Underground.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../supabase-credentials.js"></script>
+    <script src="./js/supabaseClient.js"></script>
+    <script src="./js/autenticacao.js"></script>
+    <script>
+        (function () {
+            const formulario = document.getElementById("formulario-login");
+            const campoEmail = document.getElementById("campo-email");
+            const campoSenha = document.getElementById("campo-senha");
+            const erroLogin = document.getElementById("erro-login");
+            const botaoEntrar = document.getElementById("botao-entrar");
+
+            formulario.addEventListener("submit", async function (evento) {
+                evento.preventDefault();
+                erroLogin.hidden = true;
+                botaoEntrar.textContent = "Verificando credencial...";
+
+                const resultado = await window.ControladorAutenticacao.autenticar(
+                    campoEmail.value,
+                    campoSenha.value
+                );
+
+                if (resultado.sucesso) {
+                    window.location.href = "index.html";
+                } else {
+                    erroLogin.textContent = resultado.mensagem;
+                    erroLogin.hidden = false;
+                    botaoEntrar.textContent = "Entrar no Backstage";
+                }
+            });
+        })();
+    </script>
+</body>
+
+</html>

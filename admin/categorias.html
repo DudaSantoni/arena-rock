@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categorias | Backstage Admin</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/images/icone-rock.svg">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav class="menu-cabecalho">
+        <a class="marca-topo" href="../index.html">
+            <img class="logotipo" alt="Logotipo Arena Rock" title="Arena Rock"
+                src="../assets/images/logotipo-rock.svg" />
+        </a>
+        <ul class="navegacao">
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="index.html">Painel</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="eventos.html">Shows &amp; Eventos</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao ativo" href="categorias.html">Categorias</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="inscritos.html">Ingressos / Inscritos</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="usuarios.html">Equipe</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="../index.html">Ver Site</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" id="botao-sair" href="login.html">Sair</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="painel-admin">
+        <div class="cabecalho-admin">
+            <div>
+                <h1>Categorias de Eventos de Rock</h1>
+                <p id="nome-admin-logado">Gerencie as categorias usadas para classificar e filtrar os shows no site.</p>
+            </div>
+            <a class="botao-principal" href="#formulario-categoria">+ Nova Categoria</a>
+        </div>
+
+        <section class="bloco-admin">
+            <h2>Categorias Cadastradas</h2>
+
+            <div class="envoltorio-tabela">
+                <table class="tabela-admin">
+                    <thead>
+                        <tr>
+                            <th>Categoria</th>
+                            <th>Slug</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-categorias"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="bloco-admin" id="formulario-categoria">
+            <div class="cabecalho-formulario">
+                <h2>Nova Categoria</h2>
+                <p>Defina o nome, identificador de URL (slug) e a cor da etiqueta para os filtros de eventos.</p>
+            </div>
+
+            <form class="formulario-admin" id="form-cadastro-categoria" novalidate>
+                <div class="grupo-formulario">
+                    <div class="titulo-grupo">
+                        <span class="numero-passo">1</span>
+                        <span>Dados da Categoria</span>
+                    </div>
+
+                    <div class="grade-formulario-3">
+                        <div class="campo-formulario">
+                            <label for="campo-nome-categoria">Nome da Categoria <span class="obrigatorio">*</span></label>
+                            <input type="text" id="campo-nome-categoria" name="nome" placeholder="Ex: Jam Session" />
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="campo-slug-categoria">Slug (Identificador)</label>
+                            <input type="text" id="campo-slug-categoria" name="slug" placeholder="Ex: jam-session" />
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="campo-cor-categoria">Cor de Destaque</label>
+                            <input type="color" id="campo-cor-categoria" name="cor" value="#e11d48" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rodape-formulario">
+                    <button type="submit" class="botao-principal">Salvar Categoria</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer class="rodape">
+        <p>© 2026 Arena Rock — Circuito de Eventos de Rock &amp; Cultura Underground.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../supabase-credentials.js"></script>
+    <script src="./js/supabaseClient.js"></script>
+    <script src="./js/autenticacao.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="./js/categorias.js"></script>
+</body>
+
+</html>

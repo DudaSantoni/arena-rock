@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shows &amp; Eventos | Backstage Admin</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/images/icone-rock.svg">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav class="menu-cabecalho">
+        <a class="marca-topo" href="../index.html">
+            <img class="logotipo" alt="Logotipo Arena Rock" title="Arena Rock"
+                src="../assets/images/logotipo-rock.svg" />
+        </a>
+        <ul class="navegacao">
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="index.html">Painel</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao ativo" href="eventos.html">Shows &amp; Eventos</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="categorias.html">Categorias</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="inscritos.html">Ingressos / Inscritos</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="usuarios.html">Equipe</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="../index.html">Ver Site</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" id="botao-sair" href="login.html">Sair</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="painel-admin">
+        <div class="cabecalho-admin">
+            <div>
+                <h1>Gerenciar Shows &amp; Eventos de Rock</h1>
+                <p id="nome-admin-logado">Cadastre e gerencie shows, festivais, tributos e batalhas de bandas da programação oficial.</p>
+            </div>
+            <a class="botao-principal" href="#formulario-evento">+ Novo Show / Evento</a>
+        </div>
+
+        <section class="bloco-admin">
+            <h2>Shows Cadastrados na Programação</h2>
+
+            <div class="envoltorio-tabela">
+                <table class="tabela-admin">
+                    <thead>
+                        <tr>
+                            <th>Show / Evento</th>
+                            <th>Line-up / Banda</th>
+                            <th>Categoria</th>
+                            <th>Data</th>
+                            <th>Casa de Show</th>
+                            <th>Ingressos</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-eventos"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="bloco-admin" id="formulario-evento">
+            <div class="cabecalho-formulario">
+                <h2>Cadastrar Novo Show / Evento</h2>
+                <p>Preencha as informações abaixo divididas por etapas para publicar um novo show na programação.</p>
+            </div>
+
+            <form class="formulario-admin" id="form-cadastro-evento" novalidate>
+                <div class="grupo-formulario">
+                    <div class="titulo-grupo">
+                        <span class="numero-passo">1</span>
+                        <span>Identificação &amp; Line-up</span>
+                    </div>
+
+                    <div class="grade-formulario-2">
+                        <div class="campo-formulario">
+                            <label for="campo-titulo">Nome do Show ou Festival <span class="obrigatorio">*</span></label>
+                            <input type="text" id="campo-titulo" name="titulo"
+                                placeholder="Ex: Festival Trovão de Aço 2026" />
+                            <span class="erro-campo">O nome do evento é obrigatório (mín. 3 letras)</span>
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="campo-banda-principal">Banda Principal / Line-up</label>
+                            <input type="text" id="campo-banda-principal" name="banda_principal"
+                                placeholder="Ex: Valquíria de Aço + Convidados" />
+                        </div>
+                    </div>
+
+                    <div class="grade-formulario-3">
+                        <div class="campo-formulario">
+                            <label for="campo-categoria">Categoria</label>
+                            <select id="campo-categoria" name="categoria"></select>
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="campo-vertente">Vertente do Rock</label>
+                            <input type="text" id="campo-vertente" name="vertente_rock"
+                                placeholder="Ex: Heavy Metal / Hard Rock" />
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="campo-classificacao">Classificação Etária</label>
+                            <select id="campo-classificacao" name="classificacao">
+                                <option value="18 anos">18 anos</option>
+                                <option value="16 anos">16 anos</option>
+                                <option value="Livre">Livre</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grupo-formulario">
+                    <div class="titulo-grupo">
+                        <span class="numero-passo">2</span>
+                        <span>Data, Horário &amp; Localização</span>
+                    </div>
+
+                    <div class="grade-formulario-3">
+                        <div class="campo-formulario">
+                            <label for="campo-data">Data do Show <span class="obrigatorio">*</span></label>
+                            <input type="date" id="campo-data" name="data" />
+                            <span class="erro-campo">A data é obrigatória</span>
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="campo-horario">Abertura / Horário <span class="obrigatorio">*</span></label>
+                            <input type="text" id="campo-horario" name="horario" placeholder="Ex: 20h às 02h" />
+                            <span class="erro-campo">O horário é obrigatório</span>
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="campo-organizador">Produtora / Realização</label>
+                            <input type="text" id="campo-organizador" name="organizador"
+                                placeholder="Ex: Produtora Riff Brutal" />
+                        </div>
+                    </div>
+
+                    <div class="grade-formulario-2">
+                        <div class="campo-formulario">
+                            <label for="campo-local">Casa de Show / Palco <span class="obrigatorio">*</span></label>
+                            <input type="text" id="campo-local" name="local" placeholder="Ex: Galpão Manifesto Rock" />
+                            <span class="erro-campo">O local é obrigatório</span>
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="campo-endereco">Endereço Completo</label>
+                            <input type="text" id="campo-endereco" name="endereco"
+                                placeholder="Ex: Rua Augusta, 1420 - Consolação, São Paulo/SP" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grupo-formulario">
+                    <div class="titulo-grupo">
+                        <span class="numero-passo">3</span>
+                        <span>Ingressos, Destaque &amp; Detalhes</span>
+                    </div>
+
+                    <div class="grade-formulario-3">
+                        <div class="campo-formulario">
+                            <label for="campo-vagas-totais">Lotação Total (Ingressos)</label>
+                            <input type="number" id="campo-vagas-totais" name="vagas_totais" min="0"
+                                placeholder="Ex: 500" />
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="campo-vagas-restantes">Ingressos Disponíveis</label>
+                            <input type="number" id="campo-vagas-restantes" name="vagas_restantes" min="0"
+                                placeholder="Ex: 500" />
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="campo-destaque">Destaque na Vitrine</label>
+                            <div class="campo-marcacao">
+                                <input type="checkbox" id="campo-destaque" name="destaque" />
+                                <label for="campo-destaque">Selo "Headliner / Destaque"</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="campo-formulario">
+                        <label for="campo-descricao">Descrição Completa do Show &amp; Atrações</label>
+                        <textarea id="campo-descricao" name="descricao"
+                            placeholder="Descreva os detalhes do show, cronograma das bandas e estrutura do local..."></textarea>
+                    </div>
+                </div>
+
+                <div class="rodape-formulario">
+                    <button type="button" id="salvar-evento" class="botao-principal">Salvar Show na Programação</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer class="rodape">
+        <p>© 2026 Arena Rock — Circuito de Eventos de Rock &amp; Cultura Underground.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../supabase-credentials.js"></script>
+    <script src="./js/supabaseClient.js"></script>
+    <script src="./js/autenticacao.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="./js/categorias.js"></script>
+    <script src="./js/eventos.js"></script>
+</body>
+
+</html>

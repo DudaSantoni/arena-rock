@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arena Rock | Agenda de Shows, Festivais e Cultura Underground</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/images/icone-rock.svg">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav class="menu-cabecalho" id="topo-pagina">
+        <a class="marca-topo" href="index.html">
+            <img class="logotipo" alt="Logotipo Arena Rock" title="Arena Rock"
+                src="./assets/images/logotipo-rock.svg" />
+        </a>
+        <ul class="navegacao">
+            <li class="item-navegacao">
+                <a class="link-navegacao ativo" href="index.html">Agenda Rock</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="bandas.html">Bandas &amp; Line-up</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="locais.html">Casas de Show</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="ingressos.html">Meus Ingressos</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="botao-chamada" href="admin/index.html">Backstage Admin</a>
+            </li>
+        </ul>
+    </nav>
+
+    <header class="secao-destaque">
+        <span class="selo-topo">&#9889; Temporada 2026 — Amplificadores no Máximo</span>
+        <h1 class="titulo-principal">Onde a sua tribo vive <span class="texto-grifado">a energia do próximo show</span></h1>
+        <p class="descricao-topo">Festivais de Heavy Metal, noites de Punk &amp; Grunge, tributos históricos, batalhas de garagem e workshops de guitarra em um só lugar.</p>
+
+        <input class="campo-busca" type="text" id="busca-eventos"
+            placeholder="Buscar por show, banda, estilo de rock ou casa de show..." />
+
+        <div class="estatisticas-topo">
+            <div class="item-estatistica">
+                <strong class="numero-estatistica">8+</strong>
+                <span class="rotulo-estatistica">Shows &amp; Festivais</span>
+            </div>
+            <div class="item-estatistica">
+                <strong class="numero-estatistica">15+</strong>
+                <span class="rotulo-estatistica">Bandas no Circuito</span>
+            </div>
+            <div class="item-estatistica">
+                <strong class="numero-estatistica">4</strong>
+                <span class="rotulo-estatistica">Palcos Lendários</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="secao-eventos" id="agenda">
+        <nav class="filtro-categorias" id="categorias">
+            <ul class="lista-filtros" id="lista-categorias-filtro">
+                <li class="item-filtro ativo" data-categoria="todos">Todos os Eventos</li>
+                <li class="item-filtro" data-categoria="Show">Show</li>
+                <li class="item-filtro" data-categoria="Festival">Festival</li>
+                <li class="item-filtro" data-categoria="Tributo">Tributo</li>
+                <li class="item-filtro" data-categoria="Batalha de Bandas">Batalha de Bandas</li>
+                <li class="item-filtro" data-categoria="Workshop">Workshop</li>
+                <li class="item-filtro" data-categoria="Encontro Rock">Encontro Rock</li>
+            </ul>
+        </nav>
+
+        <p class="contador-resultados" id="contador-eventos"></p>
+
+        <div class="grade-eventos" id="lista-eventos"></div>
+    </section>
+
+    <footer class="rodape">
+        <p>© 2026 Arena Rock — Circuito de Eventos de Rock &amp; Cultura Underground. Projeto de Desenvolvimento Web.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./supabase-credentials.js"></script>
+    <script src="./admin/js/supabaseClient.js"></script>
+    <script src="./js/api.js"></script>
+    <script src="./js/home.js"></script>
+</body>
+
+</html>

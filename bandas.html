@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bandas &amp; Line-up | Arena Rock</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/images/icone-rock.svg">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav class="menu-cabecalho">
+        <a class="marca-topo" href="index.html">
+            <img class="logotipo" alt="Logotipo Arena Rock" title="Arena Rock"
+                src="./assets/images/logotipo-rock.svg" />
+        </a>
+        <ul class="navegacao">
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="index.html">Agenda Rock</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao ativo" href="bandas.html">Bandas &amp; Line-up</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="locais.html">Casas de Show</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="link-navegacao" href="ingressos.html">Meus Ingressos</a>
+            </li>
+            <li class="item-navegacao">
+                <a class="botao-chamada" href="admin/index.html">Backstage Admin</a>
+            </li>
+        </ul>
+    </nav>
+
+    <header class="secao-destaque">
+        <span class="selo-topo">&#127928; Line-up Oficial do Circuito</span>
+        <h1 class="titulo-principal">As bandas que fazem <span class="texto-grifado">o chão tremer</span></h1>
+        <p class="descricao-topo">Conheça as bandas autorais e tributos confirmados nos nossos palcos: do Heavy Metal tradicional ao Punk, Grunge, Doom e Classic Rock.</p>
+
+        <input class="campo-busca" type="text" id="busca-bandas"
+            placeholder="Buscar banda por nome, vertente do rock ou cidade..." />
+    </header>
+
+    <section class="secao-conteudo">
+        <p class="contador-resultados" id="contador-bandas"></p>
+        <div class="grade-cartoes" id="lista-bandas"></div>
+    </section>
+
+    <footer class="rodape">
+        <p>© 2026 Arena Rock — Circuito de Eventos de Rock &amp; Cultura Underground. Projeto de Desenvolvimento Web.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./supabase-credentials.js"></script>
+    <script src="./admin/js/supabaseClient.js"></script>
+    <script src="./js/api.js"></script>
+    <script src="./js/bandas.js"></script>
+</body>
+
+</html>
+
