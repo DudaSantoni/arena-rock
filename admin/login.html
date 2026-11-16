@@ -21,7 +21,13 @@
             <img class="logotipo" alt="Logotipo Arena Rock" title="Arena Rock"
                 src="../assets/images/logotipo-rock.svg" />
         </a>
-        <ul class="navegacao">
+        <button type="button" class="botao-hamburguer" id="botao-menu-mobile" aria-label="Menu">
+            <span class="linha-hamburguer"></span>
+            <span class="linha-hamburguer"></span>
+            <span class="linha-hamburguer"></span>
+        </button>
+        <div class="fundo-menu-mobile" id="fundo-menu-mobile"></div>
+        <ul class="navegacao" id="menu-navegacao">
             <li class="item-navegacao">
                 <a class="link-navegacao" href="../index.html">Voltar para o Site</a>
             </li>
@@ -29,7 +35,6 @@
     </nav>
 
     <main class="secao-login">
-        <span class="selo-topo">&#127928; Credencial Backstage</span>
         <h1>Acesso da Produção</h1>
         <p>Faça login para acessar os cadastros de shows, categorias, inscritos e equipe.</p>
 
@@ -57,7 +62,7 @@
     </main>
 
     <footer class="rodape">
-        <p>© 2026 Arena Rock — Circuito de Eventos de Rock &amp; Cultura Underground.</p>
+        <p>© 2026 Arena Rock | Circuito de Eventos de Rock &amp; Cultura Underground.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

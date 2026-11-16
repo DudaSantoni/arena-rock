@@ -202,6 +202,39 @@ window.ControladorAutenticacao = (function () {
                 encerrarSessao();
             });
         });
+
+        const botaoMenu = document.getElementById("botao-menu-mobile");
+        const menuNavegacao = document.getElementById("menu-navegacao") || document.querySelector(".navegacao");
+        const fundoMenu = document.getElementById("fundo-menu-mobile");
+
+        if (botaoMenu && menuNavegacao && botaoMenu.dataset.inicializado !== "sim") {
+            botaoMenu.dataset.inicializado = "sim";
+
+            function alternarMenu() {
+                const aberto = menuNavegacao.classList.toggle("aberto");
+                botaoMenu.classList.toggle("ativo", aberto);
+                if (fundoMenu) {
+                    fundoMenu.classList.toggle("visivel", aberto);
+                }
+            }
+
+            function fecharMenu() {
+                menuNavegacao.classList.remove("aberto");
+                botaoMenu.classList.remove("ativo");
+                if (fundoMenu) {
+                    fundoMenu.classList.remove("visivel");
+                }
+            }
+
+            botaoMenu.addEventListener("click", alternarMenu);
+            if (fundoMenu) {
+                fundoMenu.addEventListener("click", fecharMenu);
+            }
+
+            menuNavegacao.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", fecharMenu);
+            });
+        }
     }
 
     exigirAutenticacao();

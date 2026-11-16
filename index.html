@@ -21,7 +21,13 @@
             <img class="logotipo" alt="Logotipo Arena Rock" title="Arena Rock"
                 src="./assets/images/logotipo-rock.svg" />
         </a>
-        <ul class="navegacao">
+        <button type="button" class="botao-hamburguer" id="botao-menu-mobile" aria-label="Menu">
+            <span class="linha-hamburguer"></span>
+            <span class="linha-hamburguer"></span>
+            <span class="linha-hamburguer"></span>
+        </button>
+        <div class="fundo-menu-mobile" id="fundo-menu-mobile"></div>
+        <ul class="navegacao" id="menu-navegacao">
             <li class="item-navegacao">
                 <a class="link-navegacao ativo" href="index.html">Agenda Rock</a>
             </li>
@@ -41,7 +47,6 @@
     </nav>
 
     <header class="secao-destaque">
-        <span class="selo-topo">&#9889; Temporada 2026 — Amplificadores no Máximo</span>
         <h1 class="titulo-principal">Onde a sua tribo vive <span class="texto-grifado">a energia do próximo show</span></h1>
         <p class="descricao-topo">Festivais de Heavy Metal, noites de Punk &amp; Grunge, tributos históricos, batalhas de garagem e workshops de guitarra em um só lugar.</p>
 
@@ -50,16 +55,20 @@
 
         <div class="estatisticas-topo">
             <div class="item-estatistica">
-                <strong class="numero-estatistica">8+</strong>
+                <strong class="numero-estatistica" id="estatistica-shows">0</strong>
                 <span class="rotulo-estatistica">Shows &amp; Festivais</span>
             </div>
             <div class="item-estatistica">
-                <strong class="numero-estatistica">15+</strong>
+                <strong class="numero-estatistica" id="estatistica-bandas">0</strong>
                 <span class="rotulo-estatistica">Bandas no Circuito</span>
             </div>
             <div class="item-estatistica">
-                <strong class="numero-estatistica">4</strong>
+                <strong class="numero-estatistica" id="estatistica-palcos">0</strong>
                 <span class="rotulo-estatistica">Palcos Lendários</span>
+            </div>
+            <div class="item-estatistica">
+                <strong class="numero-estatistica" id="estatistica-ingressos">0</strong>
+                <span class="rotulo-estatistica">Ingressos Disponíveis</span>
             </div>
         </div>
     </header>
@@ -83,7 +92,7 @@
     </section>
 
     <footer class="rodape">
-        <p>© 2026 Arena Rock — Circuito de Eventos de Rock &amp; Cultura Underground. Projeto de Desenvolvimento Web.</p>
+        <p>© 2026 Arena Rock | Circuito de Eventos de Rock &amp; Cultura Underground. Projeto de Desenvolvimento Web.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

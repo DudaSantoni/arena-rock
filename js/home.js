@@ -122,6 +122,25 @@
         contadorEventos.textContent = quantidade + (quantidade === 1 ? " evento de rock na programação" : " eventos de rock na programação");
     }
 
+    function atualizarEstatisticasTopo() {
+        const elShows = document.getElementById("estatistica-shows");
+        const elBandas = document.getElementById("estatistica-bandas");
+        const elPalcos = document.getElementById("estatistica-palcos");
+        const elIngressos = document.getElementById("estatistica-ingressos");
+
+        const eventos = EventosAPI.listarEventos();
+        const bandas = EventosAPI.listarBandas();
+        const locais = EventosAPI.listarLocais();
+        const totalIngressos = eventos.reduce(function (soma, evento) {
+            return soma + Math.max(0, Number(evento.vagasRestantes || 0));
+        }, 0);
+
+        if (elShows) elShows.textContent = eventos.length;
+        if (elBandas) elBandas.textContent = bandas.length;
+        if (elPalcos) elPalcos.textContent = locais.length;
+        if (elIngressos) elIngressos.textContent = totalIngressos.toLocaleString("pt-BR");
+    }
+
     function obterFiltrosAtuais() {
         const itemAtivo = document.querySelector(".lista-filtros .item-filtro.ativo");
         return {
@@ -151,7 +170,9 @@
             });
         });
 
+        atualizarEstatisticasTopo();
         await EventosAPI.sincronizarComSupabase();
+        atualizarEstatisticasTopo();
         setTimeout(aplicarFiltros, 200);
     }
 

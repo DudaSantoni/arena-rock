@@ -21,7 +21,13 @@
             <img class="logotipo" alt="Logotipo Arena Rock" title="Arena Rock"
                 src="./assets/images/logotipo-rock.svg" />
         </a>
-        <ul class="navegacao">
+        <button type="button" class="botao-hamburguer" id="botao-menu-mobile" aria-label="Menu">
+            <span class="linha-hamburguer"></span>
+            <span class="linha-hamburguer"></span>
+            <span class="linha-hamburguer"></span>
+        </button>
+        <div class="fundo-menu-mobile" id="fundo-menu-mobile"></div>
+        <ul class="navegacao" id="menu-navegacao">
             <li class="item-navegacao">
                 <a class="link-navegacao" href="index.html">Agenda Rock</a>
             </li>
@@ -41,17 +47,17 @@
     </nav>
 
     <header class="secao-destaque">
-        <span class="selo-topo">&#128266; Templos do Rock</span>
         <h1 class="titulo-principal">Palcos, Pubs &amp; <span class="texto-grifado">Arenas Parceiras</span></h1>
         <p class="descricao-topo">Confira a estrutura, capacidade e endereço das casas de show, pubs underground e estúdios onde acontecem os nossos eventos.</p>
     </header>
 
     <section class="secao-conteudo">
+        <p class="contador-resultados" id="contador-locais"></p>
         <div class="grade-cartoes" id="lista-locais"></div>
     </section>
 
     <footer class="rodape">
-        <p>© 2026 Arena Rock — Circuito de Eventos de Rock &amp; Cultura Underground. Projeto de Desenvolvimento Web.</p>
+        <p>© 2026 Arena Rock | Circuito de Eventos de Rock &amp; Cultura Underground. Projeto de Desenvolvimento Web.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

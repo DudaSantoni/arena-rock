@@ -21,7 +21,13 @@
             <img class="logotipo" alt="Logotipo Arena Rock" title="Arena Rock"
                 src="../assets/images/logotipo-rock.svg" />
         </a>
-        <ul class="navegacao">
+        <button type="button" class="botao-hamburguer" id="botao-menu-mobile" aria-label="Menu">
+            <span class="linha-hamburguer"></span>
+            <span class="linha-hamburguer"></span>
+            <span class="linha-hamburguer"></span>
+        </button>
+        <div class="fundo-menu-mobile" id="fundo-menu-mobile"></div>
+        <ul class="navegacao" id="menu-navegacao">
             <li class="item-navegacao">
                 <a class="link-navegacao ativo" href="index.html">Painel</a>
             </li>
@@ -49,7 +55,7 @@
     <main class="painel-admin">
         <div class="cabecalho-admin">
             <div>
-                <h1>Backstage — Painel Administrativo</h1>
+                <h1>Backstage: Painel Administrativo</h1>
                 <p id="nome-admin-logado">Gerencie a programação de shows de rock, categorias, lotes de ingressos e equipe de produção.</p>
             </div>
             <a class="botao-principal" href="eventos.html#formulario-evento">+ Cadastrar Novo Show</a>
@@ -58,31 +64,64 @@
         <div class="atalhos-admin">
             <a class="cartao-atalho" href="eventos.html">
                 <strong>Shows &amp; Festivais</strong>
-                <span>Criar, editar e remover shows de rock, line-up de bandas, datas e lotes de ingressos.</span>
+                <span id="resumo-admin-eventos">Criar, editar e remover shows de rock, line-up de bandas, datas e lotes de ingressos.</span>
             </a>
             <a class="cartao-atalho" href="categorias.html">
                 <strong>Categorias Rock</strong>
-                <span>Organizar modalidades (Show, Festival, Tributo, Batalha de Bandas, Workshop, Encontro).</span>
+                <span id="resumo-admin-categorias">Organizar modalidades de eventos e filtros do site.</span>
             </a>
             <a class="cartao-atalho" href="inscritos.html">
                 <strong>Ingressos &amp; Inscritos</strong>
-                <span>Conferir a lista de rockeiros inscritos por show, setores e códigos de confirmação.</span>
+                <span id="resumo-admin-inscritos">Conferir a lista de rockeiros inscritos por show, setores e códigos de confirmação.</span>
             </a>
             <a class="cartao-atalho" href="usuarios.html">
                 <strong>Equipe de Produção</strong>
-                <span>Controlar produtores e administradores com acesso ao Backstage.</span>
+                <span id="resumo-admin-equipe">Controlar produtores e administradores com acesso ao Backstage.</span>
             </a>
         </div>
     </main>
 
     <footer class="rodape">
-        <p>© 2026 Arena Rock — Circuito de Eventos de Rock &amp; Cultura Underground.</p>
+        <p>© 2026 Arena Rock | Circuito de Eventos de Rock &amp; Cultura Underground.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../supabase-credentials.js"></script>
     <script src="./js/supabaseClient.js"></script>
     <script src="./js/autenticacao.js"></script>
+    <script src="../js/api.js"></script>
+    <script>
+        (async function () {
+            await EventosAPI.sincronizarComSupabase();
+            const eventos = EventosAPI.listarEventos();
+            const categorias = EventosAPI.listarCategorias();
+            const inscritos = EventosAPI.listarInscricoes();
+            let equipe = window.ControladorAutenticacao ? window.ControladorAutenticacao.listarUsuariosLocais() : [];
+
+            if (window.supabaseConfigurado && window.supabaseClient) {
+                try {
+                    const resUsuarios = await window.supabaseClient.from("usuarios").select("id");
+                    if (!resUsuarios.error && resUsuarios.data) {
+                        equipe = resUsuarios.data;
+                    }
+                } catch (e) {}
+            }
+
+            const totalIngressos = eventos.reduce(function (soma, ev) {
+                return soma + Math.max(0, Number(ev.vagasRestantes || 0));
+            }, 0);
+
+            const elEventos = document.getElementById("resumo-admin-eventos");
+            const elCategorias = document.getElementById("resumo-admin-categorias");
+            const elInscritos = document.getElementById("resumo-admin-inscritos");
+            const elEquipe = document.getElementById("resumo-admin-equipe");
+
+            if (elEventos) elEventos.textContent = eventos.length + " shows cadastrados | " + totalIngressos.toLocaleString("pt-BR") + " ingressos disponíveis.";
+            if (elCategorias) elCategorias.textContent = categorias.length + " categorias ativas nos filtros do site.";
+            if (elInscritos) elInscritos.textContent = inscritos.length + " ingressos emitidos para portaria.";
+            if (elEquipe) elEquipe.textContent = equipe.length + " membros cadastrados na equipe.";
+        })();
+    </script>
 </body>
 
 </html>

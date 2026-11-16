@@ -53,10 +53,16 @@
         corpoTabela.querySelectorAll(".botao-excluir").forEach(function (botao) {
             botao.addEventListener("click", async function () {
                 const id = this.getAttribute("data-id");
+                const eventoAtualizado = EventosAPI.removerInscricaoLocal(id);
                 if (window.supabaseConfigurado && window.supabaseClient) {
                     await window.supabaseClient.from("inscricoes").delete().eq("id", id);
+                    if (eventoAtualizado && eventoAtualizado.idBanco) {
+                        await window.supabaseClient
+                            .from("eventos")
+                            .update({ vagas_restantes: eventoAtualizado.vagasRestantes })
+                            .eq("id", eventoAtualizado.idBanco);
+                    }
                 }
-                EventosAPI.removerInscricaoLocal(id);
                 renderizarInscritos();
             });
         });

@@ -55,13 +55,22 @@
         return cartao;
     }
 
-    async function inicializar() {
-        await EventosAPI.sincronizarComSupabase();
+    function renderizarLocais() {
         const locais = EventosAPI.listarLocais();
+        const contadorLocais = document.getElementById("contador-locais");
+        if (contadorLocais) {
+            contadorLocais.textContent = locais.length + (locais.length === 1 ? " casa de show parceira" : " casas de show parceiras");
+        }
         listaLocais.innerHTML = "";
         locais.forEach(function (local) {
             listaLocais.appendChild(criarCartaoLocal(local));
         });
+    }
+
+    async function inicializar() {
+        renderizarLocais();
+        await EventosAPI.sincronizarComSupabase();
+        renderizarLocais();
     }
 
     inicializar();

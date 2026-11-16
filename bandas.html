@@ -21,7 +21,13 @@
             <img class="logotipo" alt="Logotipo Arena Rock" title="Arena Rock"
                 src="./assets/images/logotipo-rock.svg" />
         </a>
-        <ul class="navegacao">
+        <button type="button" class="botao-hamburguer" id="botao-menu-mobile" aria-label="Menu">
+            <span class="linha-hamburguer"></span>
+            <span class="linha-hamburguer"></span>
+            <span class="linha-hamburguer"></span>
+        </button>
+        <div class="fundo-menu-mobile" id="fundo-menu-mobile"></div>
+        <ul class="navegacao" id="menu-navegacao">
             <li class="item-navegacao">
                 <a class="link-navegacao" href="index.html">Agenda Rock</a>
             </li>
@@ -41,7 +47,6 @@
     </nav>
 
     <header class="secao-destaque">
-        <span class="selo-topo">&#127928; Line-up Oficial do Circuito</span>
         <h1 class="titulo-principal">As bandas que fazem <span class="texto-grifado">o chão tremer</span></h1>
         <p class="descricao-topo">Conheça as bandas autorais e tributos confirmados nos nossos palcos: do Heavy Metal tradicional ao Punk, Grunge, Doom e Classic Rock.</p>
 
@@ -55,7 +60,7 @@
     </section>
 
     <footer class="rodape">
-        <p>© 2026 Arena Rock — Circuito de Eventos de Rock &amp; Cultura Underground. Projeto de Desenvolvimento Web.</p>
+        <p>© 2026 Arena Rock | Circuito de Eventos de Rock &amp; Cultura Underground. Projeto de Desenvolvimento Web.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

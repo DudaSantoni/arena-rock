@@ -38,12 +38,23 @@ const controladorEventos = {
     listar: async function () {
         if (window.supabaseConfigurado && window.supabaseClient) {
             try {
-                const resposta = await window.supabaseClient.from("eventos").select(`
-                    *,
-                    categoria:categorias(*)
-                `).order("data", { ascending: true });
-                if (resposta.data) {
-                    return resposta.data;
+                const [resEventos, resInscricoes] = await Promise.all([
+                    window.supabaseClient.from("eventos").select("*, categoria:categorias(*)").order("data", { ascending: true }),
+                    window.supabaseClient.from("inscricoes").select("evento_id")
+                ]);
+                if (!resEventos.error && resEventos.data) {
+                    const contagemPorEvento = {};
+                    if (!resInscricoes.error && resInscricoes.data) {
+                        resInscricoes.data.forEach(function (ins) {
+                            const chave = String(ins.evento_id);
+                            contagemPorEvento[chave] = (contagemPorEvento[chave] || 0) + 1;
+                        });
+                    }
+                    return resEventos.data.map(function (ev) {
+                        const inscritosReais = contagemPorEvento[String(ev.id)] || 0;
+                        ev.vagas_restantes = Math.max(0, Number(ev.vagas_totais || 0) - inscritosReais);
+                        return ev;
+                    });
                 }
             } catch (erro) {
                 console.warn("Usando lista local de eventos:", erro);

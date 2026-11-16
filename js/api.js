@@ -327,6 +327,25 @@ window.EventosAPI = (function () {
     let locais = lerStorage(CHAVE_STORAGE_LOCAIS, locaisIniciais);
     let inscricoes = lerStorage(CHAVE_STORAGE_INSCRICOES, inscricoesIniciais);
 
+    function contarInscricoesDoEvento(evento) {
+        return inscricoes.filter(function (ins) {
+            return String(ins.eventoId) === String(evento.id) ||
+                (evento.idBanco && String(ins.eventoId) === String(evento.idBanco)) ||
+                (ins.eventoTitulo && evento.titulo && ins.eventoTitulo === evento.titulo);
+        }).length;
+    }
+
+    function recalcularVagasReais() {
+        eventos = eventos.map(function (evento) {
+            const totais = Number(evento.vagasTotais || 0);
+            const ocupadas = contarInscricoesDoEvento(evento);
+            evento.vagasRestantes = Math.max(0, totais - ocupadas);
+            return evento;
+        });
+    }
+
+    recalcularVagasReais();
+
     function normalizarEventoDoSupabase(registro) {
         return {
             id: String(registro.slug || registro.id),
@@ -353,24 +372,30 @@ window.EventosAPI = (function () {
             return eventos;
         }
         try {
-            const [resEventos, resBandas, resLocais, resInscricoes] = await Promise.all([
+            const [resEventos, resBandas, resLocais, resInscricoes, resCategorias] = await Promise.all([
                 window.supabaseClient.from("eventos").select("*, categoria:categorias(*)").order("data", { ascending: true }),
                 window.supabaseClient.from("bandas").select("*").order("id", { ascending: true }),
                 window.supabaseClient.from("locais").select("*").order("id", { ascending: true }),
-                window.supabaseClient.from("inscricoes").select("*, evento:eventos(nome, slug)").order("id", { ascending: false })
+                window.supabaseClient.from("inscricoes").select("*, evento:eventos(nome, slug)").order("id", { ascending: false }),
+                window.supabaseClient.from("categorias").select("*").order("id", { ascending: true })
             ]);
 
-            if (resEventos.data && resEventos.data.length > 0) {
+            if (!resEventos.error && resEventos.data) {
                 eventos = resEventos.data.map(normalizarEventoDoSupabase);
                 salvarStorage(CHAVE_STORAGE_EVENTOS, eventos);
             }
 
-            if (resBandas.data && resBandas.data.length > 0) {
+            if (!resCategorias.error && resCategorias.data && resCategorias.data.length > 0) {
+                categorias = resCategorias.data;
+                salvarStorage(CHAVE_STORAGE_CATEGORIAS, categorias);
+            }
+
+            if (!resBandas.error && resBandas.data && resBandas.data.length > 0) {
                 bandas = resBandas.data;
                 salvarStorage(CHAVE_STORAGE_BANDAS, bandas);
             }
 
-            if (resLocais.data && resLocais.data.length > 0) {
+            if (!resLocais.error && resLocais.data && resLocais.data.length > 0) {
                 locais = resLocais.data.map(function (loc) {
                     return {
                         id: loc.id,
@@ -385,7 +410,7 @@ window.EventosAPI = (function () {
                 salvarStorage(CHAVE_STORAGE_LOCAIS, locais);
             }
 
-            if (resInscricoes.data && resInscricoes.data.length > 0) {
+            if (!resInscricoes.error && resInscricoes.data) {
                 inscricoes = resInscricoes.data.map(function (ins) {
                     const dataCriacao = ins.criado_em ? new Date(ins.criado_em) : new Date();
                     return {
@@ -401,6 +426,9 @@ window.EventosAPI = (function () {
                 });
                 salvarStorage(CHAVE_STORAGE_INSCRICOES, inscricoes);
             }
+
+            recalcularVagasReais();
+            salvarStorage(CHAVE_STORAGE_EVENTOS, eventos);
         } catch (erro) {
             console.warn("Usando dados locais como fallback:", erro);
         }
@@ -409,6 +437,8 @@ window.EventosAPI = (function () {
 
     function listarEventos() {
         eventos = lerStorage(CHAVE_STORAGE_EVENTOS, eventosIniciais);
+        inscricoes = lerStorage(CHAVE_STORAGE_INSCRICOES, inscricoesIniciais);
+        recalcularVagasReais();
         return eventos.slice();
     }
 
@@ -434,6 +464,8 @@ window.EventosAPI = (function () {
 
     function buscarEventoPorId(id) {
         eventos = lerStorage(CHAVE_STORAGE_EVENTOS, eventosIniciais);
+        inscricoes = lerStorage(CHAVE_STORAGE_INSCRICOES, inscricoesIniciais);
+        recalcularVagasReais();
         return eventos.find(function (evento) {
             return String(evento.id) === String(id) || String(evento.idBanco) === String(id);
         });
@@ -441,6 +473,8 @@ window.EventosAPI = (function () {
 
     function filtrarEventos(filtros) {
         eventos = lerStorage(CHAVE_STORAGE_EVENTOS, eventosIniciais);
+        inscricoes = lerStorage(CHAVE_STORAGE_INSCRICOES, inscricoesIniciais);
+        recalcularVagasReais();
         const termo = (filtros && filtros.termo ? filtros.termo : "").trim().toLowerCase();
         const categoria = filtros && filtros.categoria ? filtros.categoria : "";
 
@@ -577,10 +611,68 @@ window.EventosAPI = (function () {
 
     function removerInscricaoLocal(id) {
         inscricoes = lerStorage(CHAVE_STORAGE_INSCRICOES, inscricoesIniciais);
+        const removida = inscricoes.find(function (item) {
+            return String(item.id) === String(id);
+        });
         inscricoes = inscricoes.filter(function (item) {
             return String(item.id) !== String(id);
         });
         salvarStorage(CHAVE_STORAGE_INSCRICOES, inscricoes);
+
+        if (removida) {
+            eventos = lerStorage(CHAVE_STORAGE_EVENTOS, eventosIniciais);
+            const evento = eventos.find(function (ev) {
+                return String(ev.id) === String(removida.eventoId) || String(ev.idBanco) === String(removida.eventoId);
+            });
+            if (evento && evento.vagasRestantes < evento.vagasTotais) {
+                evento.vagasRestantes += 1;
+                salvarStorage(CHAVE_STORAGE_EVENTOS, eventos);
+                return evento;
+            }
+        }
+        return null;
+    }
+
+    function inicializarMenuMobile() {
+        const botaoMenu = document.getElementById("botao-menu-mobile");
+        const menuNavegacao = document.getElementById("menu-navegacao") || document.querySelector(".navegacao");
+        const fundoMenu = document.getElementById("fundo-menu-mobile");
+
+        if (!botaoMenu || !menuNavegacao || botaoMenu.dataset.inicializado === "sim") {
+            return;
+        }
+        botaoMenu.dataset.inicializado = "sim";
+
+        function alternarMenu() {
+            const aberto = menuNavegacao.classList.toggle("aberto");
+            botaoMenu.classList.toggle("ativo", aberto);
+            if (fundoMenu) {
+                fundoMenu.classList.toggle("visivel", aberto);
+            }
+        }
+
+        function fecharMenu() {
+            menuNavegacao.classList.remove("aberto");
+            botaoMenu.classList.remove("ativo");
+            if (fundoMenu) {
+                fundoMenu.classList.remove("visivel");
+            }
+        }
+
+        botaoMenu.addEventListener("click", alternarMenu);
+        if (fundoMenu) {
+            fundoMenu.addEventListener("click", fecharMenu);
+        }
+
+        menuNavegacao.querySelectorAll("a").forEach(function (link) {
+            link.addEventListener("click", fecharMenu);
+        });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", inicializarMenuMobile);
+    } else {
+        inicializarMenuMobile();
     }
 
     return {

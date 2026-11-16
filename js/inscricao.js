@@ -49,7 +49,7 @@
 
         const local = document.createElement("p");
         local.className = "local-evento";
-        local.textContent = evento.local + " — " + evento.enderecoCompleto;
+        local.textContent = evento.local + ", " + evento.enderecoCompleto;
 
         resumoEvento.appendChild(intro);
         resumoEvento.appendChild(titulo);

@@ -21,7 +21,13 @@
             <img class="logotipo" alt="Logotipo Arena Rock" title="Arena Rock"
                 src="./assets/images/logotipo-rock.svg" />
         </a>
-        <ul class="navegacao">
+        <button type="button" class="botao-hamburguer" id="botao-menu-mobile" aria-label="Menu">
+            <span class="linha-hamburguer"></span>
+            <span class="linha-hamburguer"></span>
+            <span class="linha-hamburguer"></span>
+        </button>
+        <div class="fundo-menu-mobile" id="fundo-menu-mobile"></div>
+        <ul class="navegacao" id="menu-navegacao">
             <li class="item-navegacao">
                 <a class="link-navegacao" href="index.html">Agenda Rock</a>
             </li>
@@ -99,7 +105,6 @@
         </div>
 
         <div id="inscricao-confirmada" class="confirmacao-inscricao" hidden>
-            <span class="selo-topo">Presença Confirmada no Show!</span>
             <h1 class="titulo-principal">Seu Ingresso Rock foi Gerado!</h1>
             <p>Apresente este código na portaria do evento:</p>
             <strong class="codigo-destaque" id="codigo-confirmacao"></strong>
@@ -112,7 +117,7 @@
     </main>
 
     <footer class="rodape">
-        <p>© 2026 Arena Rock — Circuito de Eventos de Rock &amp; Cultura Underground. Projeto de Desenvolvimento Web.</p>
+        <p>© 2026 Arena Rock | Circuito de Eventos de Rock &amp; Cultura Underground. Projeto de Desenvolvimento Web.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
